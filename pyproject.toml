@@ -1,7 +1,7 @@
 [project]
 name = "slide-examples"
 version = "0.1.0"
-description = "Add your description here"
+description = "Example implementations using Slide's AI agent frameworks: Tyler, Lye, and Narrator"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
