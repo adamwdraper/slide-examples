@@ -1,98 +1,120 @@
-# AI Agent Examples
+# Slide Examples
 
-This repository contains implementations of a research assistant agent using four different AI agent frameworks:
+This repository contains example implementations using Slide's AI agent frameworks: **Tyler**, **Lye**, and **Narrator**.
 
-1. **Pydantic AI** - A framework built on Pydantic for structured agent development
-2. **OpenAI Agents Python** - OpenAI's official agent SDK
-3. **CrewAI** - A framework for orchestrating role-playing AI agents
-4. **AutoGen** - Microsoft's framework for building multi-agent conversational systems
+## Overview
 
-## Installation
+These examples demonstrate how to build AI agents using Slide's ecosystem:
 
-This project uses `uv` for package management. All required packages have been installed:
+- **[Tyler](https://github.com/slide-agi/tyler)** - The core agent framework for building conversational AI assistants
+- **[Lye](https://github.com/slide-agi/lye)** - Tool library providing web search, file operations, image processing, and more
+- **[Narrator](https://github.com/slide-agi/narrator)** - Persistence layer for managing conversation threads and file storage
 
-```bash
-# Packages installed:
-uv add pydantic-ai 'pydantic-ai-slim[openai]' httpx
-uv add openai-agents duckduckgo-search
-uv add crewai 'crewai[tools]'
-uv add pyautogen 'pyautogen[tools]'
-```
+## Examples
 
-## Environment Setup
+### 1. Basic Agent (`agent.py`)
+A complete example showing:
+- Thread-based conversation management
+- Tool integration (web, image, and file tools)
+- Persistent storage with Narrator
+- Weave tracking for observability
 
-Create a `.env` file with your OpenAI API key:
-
-```bash
-OPENAI_API_KEY=your_api_key_here
-```
-
-## Running the Agents
-
-Each agent implementation performs the same task: searching for information about the Mars Perseverance rover and creating a summary.
-
-### 1. Pydantic AI Agent
-```bash
-python agent_pydantic.py
-```
-Features:
-- Structured output using Pydantic models
-- Web search using DuckDuckGo API
-- Type-safe result handling
-
-### 2. OpenAI Agents
-```bash
-python agent_openai.py
-```
-Features:
-- Official OpenAI SDK integration
-- Async function calling
-- Web search tool integration
-
-### 3. CrewAI
-```bash
-python agent_crewai.py
-```
-Features:
-- Multi-agent collaboration (Researcher + Summarizer)
-- Sequential task processing
-- Role-based agent design
-
-### 4. AutoGen
-```bash
-python agent_autogen.py
-```
-Features:
-- Code execution capabilities
-- Multi-turn conversations
-- Function registration system
-
-## Original Tyler Agent
-
-The original implementation uses the Tyler framework:
 ```bash
 python agent.py
 ```
 
-## Streaming Example
+### 2. Streaming Agent (`agent_streaming.py`)
+Demonstrates real-time streaming responses:
+- Event-based streaming output
+- Token-by-token response handling
+- Simplified setup without tools
 
-There's also a streaming example available:
 ```bash
 python agent_streaming.py
 ```
 
-## Notes
+### 3. Wandb Inference Examples
+Examples configured to use Weights & Biases infrastructure:
+- `agent_wandb_inference.py` - Basic agent with Wandb API
+- `agent_streaming_wandb_inference.py` - Streaming agent with Wandb API
 
-- All agents are configured to use GPT-4o by default
-- Web search is implemented using DuckDuckGo for consistency
-- Each agent includes Weave tracking for observability
-- The agents demonstrate different paradigms for building AI assistants
+These examples use your `WANDB_API_KEY` as the OpenAI API key for seamless integration with W&B's proxy.
 
-## Framework Comparison
+### 4. Tyler Chat CLI Configuration
+The `tyler-chat-config.yaml` file shows how to configure the Tyler CLI chat interface with:
+- Custom agent identity and purpose
+- Model parameters
+- Tool selection and configuration
 
-| Framework | Strengths | Best For |
-|-----------|-----------|----------|
-| Pydantic AI | Type safety, structured outputs | Applications requiring validated responses |
-| OpenAI Agents | Official support, simplicity | Quick prototypes with OpenAI models |
-| CrewAI | Multi-agent orchestration | Complex workflows with specialized agents |
-| AutoGen | Code execution, conversation flows | Interactive coding assistants |
+## Installation
+
+This project uses `uv` for Python package management:
+
+```bash
+# Clone the repository
+git clone https://github.com/adamwdraper/slide-examples.git
+cd slide-examples
+
+# Install dependencies with uv
+uv sync
+```
+
+## Environment Setup
+
+Create a `.env` file with your API keys:
+
+```bash
+# For OpenAI
+OPENAI_API_KEY=your_openai_api_key
+
+# For Wandb examples (optional)
+WANDB_API_KEY=your_wandb_api_key
+
+# For Narrator persistence (optional)
+NARRATOR_DATABASE_URL=your_database_url
+```
+
+## Project Structure
+
+```
+slide-examples/
+├── agent.py                           # Full-featured agent example
+├── agent_streaming.py                 # Streaming response example
+├── agent_wandb_inference.py           # Wandb-integrated agent
+├── agent_streaming_wandb_inference.py # Wandb streaming agent
+├── tyler-chat-config.yaml             # Tyler CLI configuration
+├── pyproject.toml                     # Project dependencies
+└── README.md                          # This file
+```
+
+## Key Features Demonstrated
+
+- **Conversation Management**: Thread-based conversations with message history
+- **Tool Integration**: Web search, file operations, and image processing capabilities
+- **Streaming Responses**: Real-time token streaming for responsive interactions
+- **Persistence**: Store conversations and files with Narrator
+- **Observability**: Weave integration for tracking and debugging
+- **Flexible Configuration**: YAML-based configuration for the Tyler CLI
+
+## Dependencies
+
+- Python 3.12+
+- slide-tyler ≥ 1.3.0
+- slide-lye ≥ 0.3.0
+- slide-narrator ≥ 1.0.1
+- python-dotenv (for environment variables)
+
+## Contributing
+
+Feel free to submit issues or pull requests if you have suggestions for improving these examples or adding new ones.
+
+## License
+
+This project is open source and available under the MIT License.
+
+## Related Links
+
+- [Tyler Documentation](https://github.com/slide-agi/tyler)
+- [Lye Tools Documentation](https://github.com/slide-agi/lye)
+- [Narrator Documentation](https://github.com/slide-agi/narrator)
+- [Weights & Biases](https://wandb.ai/)
